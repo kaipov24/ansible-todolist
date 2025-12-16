@@ -45,3 +45,24 @@
     name: "{{ service_name }}"
     state: started
     enabled: true
+
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+    update_cache: true
+
+- name: Allow SSH
+  ufw: 
+    rule: allow
+    name: OpenSSH
+
+- name: Allow app port
+  ufw: 
+    rule: allow
+    port: "{{ app_port }}"
+    proto: tcp
+
+- name: Enable UFW
+  ufw:
+    state: enabled
