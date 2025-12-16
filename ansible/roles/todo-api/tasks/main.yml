@@ -1,0 +1,31 @@
+- name: Create system user
+  user: 
+    name: "{{ app_user }}"
+    system: true
+    shell: /usr/sbin/nologin
+
+- name: Create working directory
+  file: 
+    path: "{{ app_dir }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: "0755"
+
+- name: Copy application code
+  copy: 
+    src: files/app.txt
+    dest: "{{ app_dir }}/app.txt"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: "0644"
+
+- name: Create environment file
+  copy:
+    dest: "{{ env_file }}"
+    content: |
+      APP_PORT={{ app_port }}
+      APP_HOST={{ app_host }}
+      APP_DATABASE_URL={{ app_database_url }}
+      APP_ENV={{ app_env }}
+    mode: "0644"

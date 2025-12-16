@@ -1,0 +1,11 @@
+    app_user: todoapp
+    app_dir: /opt/todo-api
+
+    app_port: "3000"
+    app_host: "0.0.0.0"
+    app_database_url: "{{ app_dir }}/db.sqlite"
+    app_env: dev
+
+    env_file: /etc/todo-api.env
+    service_name: todo-api
+    app_file: app.txt

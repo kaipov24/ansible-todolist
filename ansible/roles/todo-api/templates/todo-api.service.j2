@@ -1,0 +1,14 @@
+[Unit]
+Description=Todo API Service
+After=network.target
+
+[Service]
+User={{ app_user }}
+Group={{ app_user }}
+WorkingDirectory={{ app_dir }}
+EnvironmentFile={{ env_file }}
+ExecStart=/bin/bash -c 'cat {{ app_dir }}/{{ app_file }} && sleep infinity'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
